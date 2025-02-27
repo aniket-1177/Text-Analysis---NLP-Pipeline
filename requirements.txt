@@ -1,0 +1,6 @@
+spacy
+nltk
+wordcloud
+matplotlib
+scikit-learn
+flask

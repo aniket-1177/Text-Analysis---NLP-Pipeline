@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Analysis - NLP Pipeline</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>NLP Pipeline</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Run Analysis</button>
+    </form>
+    {% if results %}
+        <h2>Results:</h2>
+        <h3>Named Entities:</h3>
+        {% for entity_type, entity_names in results.entities.items() %}
+            <p><strong>{{ entity_type }}:</strong> {{ ', '.join(entity_names) }}</p>
+        {% endfor %}
+        <h3>Sentiment:</h3>
+        <p>{{ results.sentiment }}</p>
+        <h3>Top Keywords:</h3>
+        <ul>
+            {% for word, score in results.keywords %}
+                <li>{{ word }}: {{ score }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Word Cloud Image:</h3>
+        <img src="{{ url_for('static', filename='wordcloud.png') }}" alt="Word Cloud">
+    {% endif %}
+</body>
+</html>
